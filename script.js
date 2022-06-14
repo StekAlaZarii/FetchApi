@@ -40,14 +40,27 @@
         })
     function NowaLinia(dane){
       answer.innerHTML="";
-      var div = document.createElement("div"); div.innerHTML = 'UserID: ' + dane[0].userId + 'id: ' + dane[0].id + ' <br> title: ' + dane[0].title + '<br> body: '+ dane[0].body + '<br><br>';
+      var div = document.createElement("div"); div.innerHTML = 'UserID: ' + dane[0].userId + '<br>id: ' + dane[0].id + ' </br> title: ' + dane[0].title + '<br> body: '+ dane[0].body + '<br><br>';
       answer.appendChild(div);
       
     }
   })
 
   cw3.addEventListener("click", function () {
-    //TODO implement it
-  })
+    answer.innerHTML="Przetwarzanie...";
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify({
+      title: 'foo',
+      body: 'bar',
+      userId: 1,
+  }),
+    headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  }
+})
+  .then((response) => response.json())
+  .then((json) => { answer.innerHTML="Dodano nowy post o ID = "+json.id; }) })
 
+  
 })();
